@@ -6,6 +6,7 @@ public class Physics : MonoBehaviour {
     // Member variable so it can be reused instead of allocated on every update
     double gravitational_constant = 1;
     List<Vector3> accelerations;
+    public Transform centerOfMass;
 
     // Start is called before the first frame update
     void Start() {
@@ -33,11 +34,15 @@ public class Physics : MonoBehaviour {
                 accelerations[j] += acc2;
             }
         }
+        Vector3 groupVector = new Vector3(0.0f, 0.0f, 0.0f);
         for (int i = 0; i < transform.childCount; ++i) {
             Transform child = transform.GetChild(i);
+            groupVector += child.position;
             LargeMass obj = (LargeMass)child.gameObject.GetComponent(typeof(LargeMass));
             obj.velocity += accelerations[i] * Time.fixedDeltaTime;
             child.position += obj.velocity * Time.fixedDeltaTime;
         }
+        Vector3 COM = groupVector / transform.childCount;
+        centerOfMass.position = COM;
     }
 }
