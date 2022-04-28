@@ -5,6 +5,7 @@ using UnityEngine;
 public class LargeMass : MonoBehaviour {
     public Vector3 velocity;
     public double mass;
+    public double radius;
 
     // Start is called before the first frame update
     void Start() {
