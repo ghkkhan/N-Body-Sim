@@ -44,5 +44,15 @@ public class Physics : MonoBehaviour {
         }
         Vector3 COM = groupVector / transform.childCount;
         centerOfMass.position = COM;
+
+        // calculating average distance from center of mass...
+        float avgDist = 0;
+        for (int i = 0; i < transform.childCount; i++) {
+            avgDist += Vector3.Distance(centerOfMass.position, transform.GetChild(i).position);
+        }
+        avgDist /= transform.childCount;
+
+        if (avgDist < 10)   gravitational_constant = 1;
+        else                gravitational_constant = avgDist;
     }
 }
