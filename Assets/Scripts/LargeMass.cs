@@ -14,6 +14,6 @@ public class LargeMass : MonoBehaviour {
 
     // FixedUpdate is called once per "tick"
     void FixedUpdate() {
-        transform.Rotate(new Vector3(0f, 50f, 0f) * Time.deltaTime);
+        transform.Rotate(new Vector3(0f, 10f, 0f) * Time.deltaTime);
     }
 }
