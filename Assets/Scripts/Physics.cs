@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Physics : MonoBehaviour {
     // Member variable so it can be reused instead of allocated on every update
-    double gravitational_constant = 1;
     List<Vector3> accelerations;
+
+    public double gravitational_constant = 1;
     public Transform centerOfMass;
 
     // Start is called before the first frame update
@@ -34,15 +35,23 @@ public class Physics : MonoBehaviour {
                 accelerations[j] += acc2;
             }
         }
-        Vector3 groupVector = new Vector3(0.0f, 0.0f, 0.0f);
+        Vector3 centorOfMassSum = new Vector3(0.0f, 0.0f, 0.0f);
         for (int i = 0; i < transform.childCount; ++i) {
             Transform child = transform.GetChild(i);
-            groupVector += child.position;
+
+            centorOfMassSum += child.position;
+
             LargeMass obj = (LargeMass)child.gameObject.GetComponent(typeof(LargeMass));
             obj.velocity += accelerations[i] * Time.fixedDeltaTime;
             child.position += obj.velocity * Time.fixedDeltaTime;
+
+            if (child.childCount >= 1) {
+                Transform velocityArrow = child.GetChild(0);
+                // velocityArrow.
+            }
+            
         }
-        Vector3 COM = groupVector / transform.childCount;
+        Vector3 COM = centorOfMassSum / transform.childCount;
         centerOfMass.position = COM;
 
         // calculating average distance from center of mass...
