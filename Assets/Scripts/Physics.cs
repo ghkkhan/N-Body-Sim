@@ -43,6 +43,7 @@ public class Physics : MonoBehaviour {
 
             LargeMass obj = (LargeMass)child.gameObject.GetComponent(typeof(LargeMass));
             obj.velocity += accelerations[i] * Time.fixedDeltaTime;
+            obj.acceleration = accelerations[i];
             child.position += obj.velocity * Time.fixedDeltaTime;
 
             if (child.childCount >= 1) {
