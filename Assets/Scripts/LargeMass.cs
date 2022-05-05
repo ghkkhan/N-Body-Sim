@@ -15,7 +15,7 @@ public class LargeMass : MonoBehaviour {
     void Start() {
         
     }
-
+    
     // FixedUpdate is called once per "tick"
     void FixedUpdate() {
         // Rotate the earth (visual effect)

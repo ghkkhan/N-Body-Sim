@@ -36,12 +36,13 @@ public class Physics : MonoBehaviour {
             }
         }
         Vector3 centorOfMassSum = new Vector3(0.0f, 0.0f, 0.0f);
+        double totalMass = 0;
         for (int i = 0; i < transform.childCount; ++i) {
             Transform child = transform.GetChild(i);
+            LargeMass obj = (LargeMass)child.gameObject.GetComponent(typeof(LargeMass));        
+            centorOfMassSum += child.position * (float)obj.mass;
+            totalMass += obj.mass;
 
-            centorOfMassSum += child.position;
-
-            LargeMass obj = (LargeMass)child.gameObject.GetComponent(typeof(LargeMass));
             obj.velocity += accelerations[i] * Time.fixedDeltaTime;
             obj.acceleration = accelerations[i];
             child.position += obj.velocity * Time.fixedDeltaTime;
@@ -52,7 +53,7 @@ public class Physics : MonoBehaviour {
             }
             
         }
-        Vector3 COM = centorOfMassSum / transform.childCount;
+        Vector3 COM = centorOfMassSum / (float)totalMass;
         centerOfMass.position = COM;
 
         // calculating average distance from center of mass...
