@@ -9,27 +9,28 @@ public class ButtonBehavior : MonoBehaviour {
     private const float SPEDUP = 2f;
     private const float SLOWDOWN = 0.5f;
 
-    private float a = PLAY;
+    public float goalSpeed = PLAY;
 
     public void OnPauseButtonPress() {
-        a = PAUSED;
+        goalSpeed = PAUSED;
     }
     public void OnPlayButtonPress() {
-        a = PLAY;
+        goalSpeed = PLAY;
     }
     public void OnTwoXSpeed() {
-        a = SPEDUP;
+        goalSpeed = SPEDUP;
     }
     public void onHalfSpeed() {
-        a = SLOWDOWN;
+        goalSpeed = SLOWDOWN;
     }
 
+    // Gradually change timeScale when a button is pressed, for a smoother experience
     void TimeStep(float target) {
         if (Time.timeScale > target) Time.timeScale -= 0.04f;        
         else Time.timeScale += 0.04f;
         if (Mathf.Abs(target - Time.timeScale) < 0.05f) Time.timeScale = target;
     }
     void Update() {
-        if (Time.timeScale != a) TimeStep(a);
+        if (Time.timeScale != goalSpeed) TimeStep(goalSpeed);
     }
 }
