@@ -6,7 +6,7 @@ using TMPro;
 
 
 public class ButtonBehavior : MonoBehaviour {
-    public float goalSpeed = 1.0f;
+    private float goalSpeed = 1.0f;
     public TMP_Text speedText;
 
     public void OnPauseButtonPress() {
